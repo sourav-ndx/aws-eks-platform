@@ -19,7 +19,7 @@ the reasoning behind it — not just what was built, but why.
 
 ## Architecture
 
-![ AWS Platform Architecture](docs/The Platform-architecture.svg)
+![ AWS Platform Architecture](docs/eks-architecture.svg)
 
 ---
 
