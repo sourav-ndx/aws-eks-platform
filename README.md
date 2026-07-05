@@ -1,4 +1,4 @@
-# ITP AWS Platform
+# AWS EKS Platform
 ### Production-Grade Kubernetes Platform on AWS EKS
 
 ---
@@ -9,7 +9,7 @@ Recently got the opportunity to participate in architecting an application
 on AWS from the ground up. It was an incredible learning experience — 
 designing VPC networks, provisioning EKS, wiring up security with zero 
 long-lived credentials, and building automated pipelines that deploy without 
-storing a single AWS key anywhere.
+storing a single AWS key anywhere
 
 This repository recreates that exact architecture with a demo application.
 Every infrastructure decision here is production-grade and documented with 
@@ -19,7 +19,7 @@ the reasoning behind it — not just what was built, but why.
 
 ## Architecture
 
-![ITP AWS Platform Architecture](docs/itp-architecture.svg)
+![ AWS Platform Architecture](docs/The Platform-architecture.svg)
 
 ---
 

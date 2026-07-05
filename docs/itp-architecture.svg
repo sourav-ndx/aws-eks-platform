@@ -11,7 +11,7 @@
 
   <rect x="0" y="0" width="1400" height="960" fill="#0B1220"/>
 
-  <text x="40" y="48" fill="#E6EDF3" font-size="26" font-weight="600">ITP AWS Platform — EKS Reference Architecture</text>
+  <text x="40" y="48" fill="#E6EDF3" font-size="26" font-weight="600"> EKS AWS Platform — EKS and VPC Reference Architecture</text>
   <text x="40" y="74" fill="#8b98a9" font-size="14">Multi-AZ EKS · zero long-lived credentials (OIDC + IRSA) · CloudWatch observability · GitHub Actions CI/CD</text>
 
   <!-- AWS Cloud -->
@@ -52,10 +52,10 @@
   <text x="495" y="420" fill="#f2a35c" font-size="14" font-weight="600" text-anchor="middle">EKS node — us-east-1a</text>
   <text x="495" y="440" fill="#b98a5c" font-size="11" text-anchor="middle">t3.medium · VPC CNI pod IPs</text>
   <rect x="372" y="470" width="115" height="60" rx="7" fill="#2a1a08" stroke="#f2a35c" stroke-width="1"/>
-  <text x="430" y="496" fill="#ffd9ad" font-size="12.5" font-weight="600" text-anchor="middle">ITP pod</text>
+  <text x="430" y="496" fill="#ffd9ad" font-size="12.5" font-weight="600" text-anchor="middle"> APP pod</text>
   <text x="430" y="514" fill="#c79b6b" font-size="10.5" text-anchor="middle">10.0.17.x</text>
   <rect x="502" y="470" width="115" height="60" rx="7" fill="#2a1a08" stroke="#f2a35c" stroke-width="1"/>
-  <text x="560" y="496" fill="#ffd9ad" font-size="12.5" font-weight="600" text-anchor="middle">ITP pod</text>
+  <text x="560" y="496" fill="#ffd9ad" font-size="12.5" font-weight="600" text-anchor="middle"> APP pod</text>
   <text x="560" y="514" fill="#c79b6b" font-size="10.5" text-anchor="middle">10.0.18.x</text>
 
   <!-- Node B -->
@@ -63,10 +63,10 @@
   <text x="835" y="420" fill="#f2a35c" font-size="14" font-weight="600" text-anchor="middle">EKS node — us-east-1b</text>
   <text x="835" y="440" fill="#b98a5c" font-size="11" text-anchor="middle">t3.medium · VPC CNI pod IPs</text>
   <rect x="712" y="470" width="115" height="60" rx="7" fill="#2a1a08" stroke="#f2a35c" stroke-width="1"/>
-  <text x="770" y="496" fill="#ffd9ad" font-size="12.5" font-weight="600" text-anchor="middle">ITP pod</text>
+  <text x="770" y="496" fill="#ffd9ad" font-size="12.5" font-weight="600" text-anchor="middle">APP pod</text>
   <text x="770" y="514" fill="#c79b6b" font-size="10.5" text-anchor="middle">10.0.33.x</text>
   <rect x="842" y="470" width="115" height="60" rx="7" fill="#2a1a08" stroke="#f2a35c" stroke-width="1"/>
-  <text x="900" y="496" fill="#ffd9ad" font-size="12.5" font-weight="600" text-anchor="middle">ITP pod</text>
+  <text x="900" y="496" fill="#ffd9ad" font-size="12.5" font-weight="600" text-anchor="middle">APP pod</text>
   <text x="900" y="514" fill="#c79b6b" font-size="10.5" text-anchor="middle">10.0.34.x</text>
 
   <!-- RDS -->
