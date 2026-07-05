@@ -1,0 +1,18 @@
+# Working files
+iam_policy.json
+alb-trust-policy.json
+*.json
+
+# Mac
+.DS_Store
+
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/*.tfvars
+
+# Sensitive
+*.pem
+*.key
+credentials
