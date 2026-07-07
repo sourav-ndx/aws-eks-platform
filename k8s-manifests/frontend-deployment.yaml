@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: itp-frontend
+  namespace: itp-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: itp-frontend
+  template:
+    metadata:
+      labels:
+        app: itp-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: 440744215136.dkr.ecr.us-east-1.amazonaws.com/itp-frontend:v1
+        ports:
+        - containerPort: 80

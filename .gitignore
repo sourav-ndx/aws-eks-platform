@@ -15,4 +15,4 @@ terraform/*.tfvars
 # Sensitive
 *.pem
 *.key
-credentials
+credentialsk8s-manifests/mysql-secret.yaml

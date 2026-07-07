@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITP - Internal Test Platform</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+        h1 { color: #232f3e; }
+        table { border-collapse: collapse; width: 100%; background: white; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #232f3e; color: white; }
+        .status { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>ITP - Internal Test Platform</h1>
+    <p>Backend Status: <span class="status" id="status">Checking...</span></p>
+    <h2>Employees</h2>
+    <table>
+        <thead><tr><th>ID</th><th>Name</th><th>Department</th><th>Role</th></tr></thead>
+        <tbody id="data">Loading...</tbody>
+    </table>
+    <script>
+        fetch('/api/health')
+            .then(r => r.json())
+            .then(d => document.getElementById('status').textContent = d.status)
+            .catch(() => document.getElementById('status').textContent = 'Unreachable');
+
+        fetch('/api/employees')
+            .then(r => r.json())
+            .then(data => {
+                const tbody = document.getElementById('data');
+                tbody.innerHTML = data.map(e =>
+                    `<tr><td>${e.id}</td><td>${e.name}</td><td>${e.department}</td><td>${e.role}</td></tr>`
+                ).join('');
+            });
+    </script>
+</body>
+</html>
