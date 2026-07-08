@@ -1,0 +1,226 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="980" viewBox="0 0 1400 980" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ar-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#8C4FFF" stroke-width="1.6" stroke-linecap="round"/></marker>
+    <marker id="ar-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#58a6ff" stroke-width="1.6" stroke-linecap="round"/></marker>
+    <marker id="ar-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#ED7100" stroke-width="1.6" stroke-linecap="round"/></marker>
+    <marker id="ar-k" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#E7157B" stroke-width="1.6" stroke-linecap="round"/></marker>
+    <marker id="ar-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#7AA116" stroke-width="1.6" stroke-linecap="round"/></marker>
+    <marker id="ar-w" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#8b98a9" stroke-width="1.6" stroke-linecap="round"/></marker>
+    <marker id="ar-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#527FFF" stroke-width="1.6" stroke-linecap="round"/></marker>
+    <marker id="ar-t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#1D9E75" stroke-width="1.6" stroke-linecap="round"/></marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1400" height="980" fill="#0B1220"/>
+
+  <!-- Title -->
+  <text x="40" y="46" fill="#E6EDF3" font-size="24" font-weight="600">ITP — AWS EKS 3-Tier Platform · Reference Architecture</text>
+  <text x="40" y="72" fill="#8b98a9" font-size="13">Nginx frontend · Flask backend · MySQL StatefulSet · ALB Ingress · IRSA · CloudWatch · GitHub Actions CI/CD</text>
+
+  <!-- AWS Cloud boundary -->
+  <rect x="240" y="95" width="1120" height="820" rx="14" fill="#0F1830" stroke="#33415a" stroke-width="1.5"/>
+  <text x="262" y="120" fill="#8b98a9" font-size="13" font-weight="600">AWS Cloud — us-east-1</text>
+
+  <!-- EKS Control Plane (top right) -->
+  <rect x="1070" y="138" width="258" height="85" rx="10" fill="#1a1408" stroke="#ED7100" stroke-width="1.5"/>
+  <text x="1199" y="170" fill="#f2a35c" font-size="15" font-weight="600" text-anchor="middle">EKS control plane</text>
+  <text x="1199" y="192" fill="#b98a5c" font-size="11.5" text-anchor="middle">AWS managed · API server · etcd</text>
+
+  <!-- VPC -->
+  <rect x="278" y="138" width="750" height="648" rx="12" fill="#131022" stroke="#8C4FFF" stroke-width="1.5"/>
+  <text x="298" y="163" fill="#b9a3ff" font-size="13" font-weight="600">VPC — 10.0.0.0/16</text>
+
+  <!-- IGW -->
+  <rect x="248" y="250" width="72" height="50" rx="8" fill="#1b1030" stroke="#8C4FFF" stroke-width="1.5"/>
+  <text x="284" y="280" fill="#c9b3ff" font-size="13" font-weight="600" text-anchor="middle">IGW</text>
+
+  <!-- Public subnet -->
+  <rect x="308" y="178" width="690" height="140" rx="10" fill="#101a10" stroke="#3F8624" stroke-width="1.2" stroke-dasharray="6 4"/>
+  <text x="324" y="200" fill="#7fb96a" font-size="12" font-weight="600">Public subnets — 10.0.1.0/24 · 10.0.2.0/24 (us-east-1a / 1b)</text>
+
+  <!-- ALB -->
+  <rect x="340" y="214" width="200" height="82" rx="8" fill="#1b1030" stroke="#8C4FFF" stroke-width="1.5"/>
+  <text x="440" y="248" fill="#c9b3ff" font-size="16" font-weight="600" text-anchor="middle">ALB</text>
+  <text x="440" y="268" fill="#8d7bc0" font-size="11.5" text-anchor="middle">HTTP:80 · internet-facing</text>
+  <text x="440" y="285" fill="#8d7bc0" font-size="11" text-anchor="middle">Ingress-managed · ALB Controller</text>
+
+  <!-- NAT Gateway -->
+  <rect x="740" y="214" width="200" height="82" rx="8" fill="#1b1030" stroke="#8C4FFF" stroke-width="1.5"/>
+  <text x="840" y="248" fill="#c9b3ff" font-size="15" font-weight="600" text-anchor="middle">NAT Gateway</text>
+  <text x="840" y="270" fill="#8d7bc0" font-size="11.5" text-anchor="middle">egress only · Elastic IP</text>
+  <text x="840" y="287" fill="#8d7bc0" font-size="11" text-anchor="middle">node → internet (ECR, STS)</text>
+
+  <!-- Private subnet -->
+  <rect x="308" y="358" width="690" height="398" rx="10" fill="#0e1626" stroke="#2f6fd1" stroke-width="1.2" stroke-dasharray="6 4"/>
+  <text x="324" y="380" fill="#6ba3e8" font-size="12" font-weight="600">Private subnets — 10.0.16.0/20 · 10.0.32.0/20 (no inbound internet)</text>
+
+  <!-- Node A (us-east-1a) -->
+  <rect x="328" y="392" width="316" height="340" rx="8" fill="#1a1207" stroke="#ED7100" stroke-width="1.5"/>
+  <text x="486" y="416" fill="#f2a35c" font-size="13" font-weight="600" text-anchor="middle">EKS node — us-east-1a · t3.medium</text>
+
+  <!-- Frontend pod (node A) -->
+  <rect x="346" y="430" width="136" height="72" rx="7" fill="#2a1a08" stroke="#f2a35c" stroke-width="1"/>
+  <text x="414" y="454" fill="#ffd9ad" font-size="12" font-weight="600" text-anchor="middle">Frontend pod</text>
+  <text x="414" y="472" fill="#c79b6b" font-size="10.5" text-anchor="middle">Nginx · port 80</text>
+  <text x="414" y="490" fill="#c79b6b" font-size="10" text-anchor="middle">ECR · linux/amd64</text>
+
+  <!-- Backend pod (node A) -->
+  <rect x="498" y="430" width="136" height="72" rx="7" fill="#2a1a08" stroke="#f2a35c" stroke-width="1"/>
+  <text x="566" y="454" fill="#ffd9ad" font-size="12" font-weight="600" text-anchor="middle">Backend pod</text>
+  <text x="566" y="472" fill="#c79b6b" font-size="10.5" text-anchor="middle">Flask · port 5000</text>
+  <text x="566" y="490" fill="#c79b6b" font-size="10" text-anchor="middle">IRSA · mysql-secret</text>
+
+  <!-- ClusterIP label between pods -->
+  <text x="486" y="524" fill="#8b98a9" font-size="10" text-anchor="middle">ClusterIP svc</text>
+  <line x1="482" y1="502" x2="482" y2="515" stroke="#8b98a9" stroke-width="1" stroke-dasharray="3 2"/>
+  <line x1="414" y1="502" x2="566" y2="502" stroke="#8b98a9" stroke-width="1" stroke-dasharray="3 2"/>
+  <line x1="566" y1="502" x2="566" y2="515" stroke="#8b98a9" stroke-width="1" stroke-dasharray="3 2"/>
+
+  <!-- MySQL StatefulSet (node A) -->
+  <rect x="346" y="536" width="288" height="82" rx="7" fill="#0d1430" stroke="#527FFF" stroke-width="1.2"/>
+  <text x="490" y="560" fill="#9db8ff" font-size="12" font-weight="600" text-anchor="middle">MySQL StatefulSet</text>
+  <text x="490" y="578" fill="#6c82c4" font-size="10.5" text-anchor="middle">port 3306 · headless ClusterIP svc</text>
+  <text x="490" y="595" fill="#6c82c4" font-size="10.5" text-anchor="middle">EBS PVC 10Gi · gp2 · ReadWriteOnce</text>
+  <text x="490" y="611" fill="#6c82c4" font-size="10" text-anchor="middle">[prod: replace with RDS Multi-AZ]</text>
+
+  <!-- ALB Controller in node A -->
+  <rect x="346" y="630" width="288" height="80" rx="7" fill="#1a1207" stroke="#ED7100" stroke-width="1"/>
+  <text x="490" y="654" fill="#f2a35c" font-size="12" font-weight="600" text-anchor="middle">ALB Controller · kube-system</text>
+  <text x="490" y="672" fill="#b98a5c" font-size="10.5" text-anchor="middle">IRSA · itp-alb-contrlr-role</text>
+  <text x="490" y="690" fill="#b98a5c" font-size="10.5" text-anchor="middle">watches Ingress → creates ALB</text>
+
+  <!-- Node B (us-east-1b) -->
+  <rect x="660" y="392" width="316" height="180" rx="8" fill="#1a1207" stroke="#ED7100" stroke-width="1.5"/>
+  <text x="818" y="416" fill="#f2a35c" font-size="13" font-weight="600" text-anchor="middle">EKS node — us-east-1b · t3.medium</text>
+
+  <!-- Frontend pod (node B) -->
+  <rect x="678" y="430" width="136" height="72" rx="7" fill="#2a1a08" stroke="#f2a35c" stroke-width="1"/>
+  <text x="746" y="454" fill="#ffd9ad" font-size="12" font-weight="600" text-anchor="middle">Frontend pod</text>
+  <text x="746" y="472" fill="#c79b6b" font-size="10.5" text-anchor="middle">Nginx · port 80</text>
+  <text x="746" y="490" fill="#c79b6b" font-size="10" text-anchor="middle">ECR · linux/amd64</text>
+
+  <!-- Backend pod (node B) -->
+  <rect x="830" y="430" width="136" height="72" rx="7" fill="#2a1a08" stroke="#f2a35c" stroke-width="1"/>
+  <text x="898" y="454" fill="#ffd9ad" font-size="12" font-weight="600" text-anchor="middle">Backend pod</text>
+  <text x="898" y="472" fill="#c79b6b" font-size="10.5" text-anchor="middle">Flask · port 5000</text>
+  <text x="898" y="490" fill="#c79b6b" font-size="10" text-anchor="middle">IRSA · mysql-secret</text>
+
+  <!-- Node B IRSA/IAM box -->
+  <rect x="678" y="516" width="288" height="52" rx="7" fill="#131022" stroke="#8C4FFF" stroke-width="1"/>
+  <text x="822" y="538" fill="#b9a3ff" font-size="11.5" font-weight="600" text-anchor="middle">OIDC Provider · STS</text>
+  <text x="822" y="557" fill="#7a6ab0" font-size="10.5" text-anchor="middle">JWT token → AssumeRoleWithWebIdentity</text>
+
+  <!-- Right column services -->
+  <!-- CloudWatch -->
+  <rect x="1070" y="270" width="258" height="85" rx="10" fill="#1c0c14" stroke="#E7157B" stroke-width="1.5"/>
+  <text x="1199" y="302" fill="#ff8fc0" font-size="15" font-weight="600" text-anchor="middle">CloudWatch</text>
+  <text x="1199" y="322" fill="#b0678c" font-size="11.5" text-anchor="middle">Container Insights · Pod logs</text>
+  <text x="1199" y="340" fill="#b0678c" font-size="11" text-anchor="middle">Fluent Bit DaemonSet</text>
+
+  <!-- ECR -->
+  <rect x="1070" y="396" width="258" height="85" rx="10" fill="#1a1408" stroke="#ED7100" stroke-width="1.5"/>
+  <text x="1199" y="428" fill="#f2a35c" font-size="15" font-weight="600" text-anchor="middle">ECR</text>
+  <text x="1199" y="448" fill="#b98a5c" font-size="11.5" text-anchor="middle">itp-frontend · itp-backend</text>
+  <text x="1199" y="466" fill="#b98a5c" font-size="11" text-anchor="middle">linux/amd64 · node IAM pull</text>
+
+  <!-- S3 -->
+  <rect x="1070" y="522" width="258" height="85" rx="10" fill="#131a08" stroke="#7AA116" stroke-width="1.5"/>
+  <text x="1199" y="554" fill="#b5d178" font-size="15" font-weight="600" text-anchor="middle">S3</text>
+  <text x="1199" y="574" fill="#84a04e" font-size="11.5" text-anchor="middle">Terraform state · test artifacts</text>
+  <text x="1199" y="592" fill="#84a04e" font-size="11" text-anchor="middle">IRSA access · no static keys</text>
+
+  <!-- IAM / IRSA -->
+  <rect x="1070" y="648" width="258" height="85" rx="10" fill="#1b1030" stroke="#8C4FFF" stroke-width="1.5"/>
+  <text x="1199" y="680" fill="#c9b3ff" font-size="15" font-weight="600" text-anchor="middle">IAM / IRSA</text>
+  <text x="1199" y="700" fill="#8d7bc0" font-size="11.5" text-anchor="middle">itp-alb-contrlr-role · node-role</text>
+  <text x="1199" y="718" fill="#8d7bc0" font-size="11" text-anchor="middle">OIDC federated · zero static keys</text>
+
+  <!-- Users box -->
+  <rect x="44" y="228" width="150" height="90" rx="10" fill="#10161f" stroke="#8b98a9" stroke-width="1.5"/>
+  <text x="119" y="266" fill="#dbe4ee" font-size="15" font-weight="600" text-anchor="middle">Users</text>
+  <text x="119" y="286" fill="#8b98a9" font-size="11.5" text-anchor="middle">HTTP · browser</text>
+
+  <!-- GitHub Actions -->
+  <rect x="44" y="810" width="190" height="90" rx="10" fill="#161b22" stroke="#58a6ff" stroke-width="1.5"/>
+  <text x="139" y="846" fill="#9ecbff" font-size="14" font-weight="600" text-anchor="middle">GitHub Actions</text>
+  <text x="139" y="866" fill="#6b91b8" font-size="11" text-anchor="middle">OIDC · docker build+push</text>
+  <text x="139" y="882" fill="#6b91b8" font-size="11" text-anchor="middle">kubectl apply · no AWS keys</text>
+
+  <!-- FLOW LINES -->
+  <!-- Users → IGW → ALB -->
+  <line x1="194" y1="272" x2="246" y2="272" stroke="#58a6ff" stroke-width="1.6" marker-end="url(#ar-b)"/>
+  <line x1="322" y1="268" x2="338" y2="260" stroke="#58a6ff" stroke-width="1.6" marker-end="url(#ar-b)"/>
+
+  <!-- ALB → Frontend pods (both nodes) -->
+  <path d="M420 296 C420 360, 414 408, 414 428" fill="none" stroke="#8C4FFF" stroke-width="1.6" marker-end="url(#ar-p)"/>
+  <path d="M460 296 C460 360, 746 400, 746 428" fill="none" stroke="#8C4FFF" stroke-width="1.6" marker-end="url(#ar-p)"/>
+
+  <!-- ALB → Backend pods -->
+  <path d="M470 296 C470 356, 566 408, 566 428" fill="none" stroke="#8C4FFF" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ar-p)"/>
+
+  <!-- Backend → MySQL -->
+  <line x1="566" y1="502" x2="566" y2="534" stroke="#527FFF" stroke-width="1.6" marker-end="url(#ar-r)"/>
+  <line x1="414" y1="502" x2="414" y2="534" stroke="#527FFF" stroke-width="1.6" marker-end="url(#ar-r)"/>
+
+  <!-- Node egress → NAT -->
+  <line x1="800" y1="392" x2="840" y2="298" stroke="#8b98a9" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#ar-w)"/>
+
+  <!-- Pods → CloudWatch -->
+  <path d="M978 450 C1030 450, 1046 318, 1068 312" fill="none" stroke="#E7157B" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ar-k)"/>
+
+  <!-- ECR → nodes (image pull) -->
+  <path d="M1070 440 C1010 440, 990 420, 978 420" fill="none" stroke="#ED7100" stroke-width="1.6" marker-end="url(#ar-o)"/>
+
+  <!-- Pods → S3 -->
+  <path d="M978 490 C1030 490, 1040 566, 1068 566" fill="none" stroke="#7AA116" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ar-g)"/>
+
+  <!-- ALB Controller → IAM/IRSA -->
+  <path d="M978 650 C1020 650, 1040 690, 1068 690" fill="none" stroke="#8C4FFF" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ar-p)"/>
+
+  <!-- Control plane ↔ nodes -->
+  <path d="M1199 223 L1199 246 L1050 246 L1050 430 L978 430" fill="none" stroke="#8b98a9" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#ar-w)"/>
+
+  <!-- GitHub Actions → ECR push -->
+  <path d="M234 852 L1150 852 Q1200 852 1200 808 L1200 483" fill="none" stroke="#ED7100" stroke-width="1.6" marker-end="url(#ar-o)"/>
+  <text x="600" y="844" fill="#b98a5c" font-size="11">docker build --platform linux/amd64 + push · OIDC federated</text>
+
+  <!-- ANIMATED TRAFFIC DOTS -->
+  <!-- User → ALB -->
+  <circle r="5" fill="#58a6ff"><animateMotion dur="2.4s" repeatCount="indefinite" path="M194 272 L440 264"/></circle>
+
+  <!-- ALB → Frontend node A -->
+  <circle r="4.5" fill="#8C4FFF"><animateMotion dur="2.0s" repeatCount="indefinite" path="M420 296 C420 360, 414 408, 414 428"/></circle>
+
+  <!-- ALB → Frontend node B -->
+  <circle r="4.5" fill="#8C4FFF"><animateMotion dur="2.0s" begin="1.0s" repeatCount="indefinite" path="M460 296 C460 360, 746 400, 746 428"/></circle>
+
+  <!-- Frontend → Backend (ClusterIP) -->
+  <circle r="4" fill="#1D9E75"><animateMotion dur="1.2s" repeatCount="indefinite" path="M482 466 L566 466"/></circle>
+
+  <!-- Backend → MySQL -->
+  <circle r="4.5" fill="#527FFF"><animateMotion dur="1.6s" repeatCount="indefinite" path="M566 502 L566 534"/></circle>
+  <circle r="4.5" fill="#527FFF"><animateMotion dur="1.6s" begin="0.8s" repeatCount="indefinite" path="M414 502 L414 534"/></circle>
+
+  <!-- Pods → CloudWatch -->
+  <circle r="4" fill="#E7157B"><animateMotion dur="2.6s" repeatCount="indefinite" path="M978 450 C1030 450, 1046 318, 1068 312"/></circle>
+
+  <!-- ECR → nodes -->
+  <circle r="4" fill="#ED7100"><animateMotion dur="2.2s" repeatCount="indefinite" path="M1070 440 C1010 440, 990 420, 978 420"/></circle>
+
+  <!-- Pods → S3 -->
+  <circle r="4" fill="#7AA116"><animateMotion dur="2.6s" begin="1.3s" repeatCount="indefinite" path="M978 490 C1030 490, 1040 566, 1068 566"/></circle>
+
+  <!-- GitHub → ECR -->
+  <circle r="5" fill="#ED7100"><animateMotion dur="5s" repeatCount="indefinite" path="M234 852 L1150 852 Q1200 852 1200 808 L1200 483"/></circle>
+
+  <!-- LEGEND -->
+  <rect x="44" y="936" width="1316" height="36" rx="6" fill="#0F1830" stroke="#33415a" stroke-width="1"/>
+  <circle cx="64" cy="954" r="5" fill="#58a6ff"/><text x="76" y="959" fill="#8b98a9" font-size="11.5">user traffic</text>
+  <circle cx="180" cy="954" r="5" fill="#8C4FFF"/><text x="192" y="959" fill="#8b98a9" font-size="11.5">ALB → pod IPs (VPC CNI)</text>
+  <circle cx="360" cy="954" r="5" fill="#527FFF"/><text x="372" y="959" fill="#8b98a9" font-size="11.5">backend → MySQL</text>
+  <circle cx="500" cy="954" r="5" fill="#1D9E75"/><text x="512" y="959" fill="#8b98a9" font-size="11.5">ClusterIP routing</text>
+  <circle cx="640" cy="954" r="5" fill="#ED7100"/><text x="652" y="959" fill="#8b98a9" font-size="11.5">CI/CD · image pull</text>
+  <circle cx="780" cy="954" r="5" fill="#E7157B"/><text x="792" y="959" fill="#8b98a9" font-size="11.5">logs → CloudWatch</text>
+  <circle cx="930" cy="954" r="5" fill="#7AA116"/><text x="942" y="959" fill="#8b98a9" font-size="11.5">artifacts → S3</text>
+  <circle cx="1060" cy="954" r="5" fill="#8b98a9"/><text x="1072" y="959" fill="#8b98a9" font-size="11.5">control plane / egress</text>
+</svg>
