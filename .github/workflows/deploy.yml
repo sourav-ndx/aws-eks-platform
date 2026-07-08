@@ -1,0 +1,85 @@
+name: Build and Deploy to EKS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'k8s-manifests/**'
+
+env:
+  AWS_REGION: us-east-1
+  EKS_CLUSTER: itp-eks-cluster
+  ECR_REGISTRY: 440744215136.dkr.ecr.us-east-1.amazonaws.com
+  FRONTEND_IMAGE: itp-frontend
+  BACKEND_IMAGE: itp-backend
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::440744215136:role/itp-github-actions-role
+          aws-region: us-east-1
+
+      - name: Login to ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push frontend image
+        run: |
+          docker build --platform linux/amd64 \
+            -t $ECR_REGISTRY/$FRONTEND_IMAGE:${{ github.sha }} \
+            -t $ECR_REGISTRY/$FRONTEND_IMAGE:latest \
+            app/frontend/
+          docker push $ECR_REGISTRY/$FRONTEND_IMAGE:${{ github.sha }}
+          docker push $ECR_REGISTRY/$FRONTEND_IMAGE:latest
+
+      - name: Build and push backend image
+        run: |
+          docker build --platform linux/amd64 \
+            -t $ECR_REGISTRY/$BACKEND_IMAGE:${{ github.sha }} \
+            -t $ECR_REGISTRY/$BACKEND_IMAGE:latest \
+            app/backend/
+          docker push $ECR_REGISTRY/$BACKEND_IMAGE:${{ github.sha }}
+          docker push $ECR_REGISTRY/$BACKEND_IMAGE:latest
+
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig \
+            --name $EKS_CLUSTER \
+            --region $AWS_REGION
+
+      - name: Deploy to EKS
+        run: |
+          kubectl apply -f k8s-manifests/namespace.yaml
+          kubectl apply -f k8s-manifests/mysql-statefulset.yaml
+          kubectl apply -f k8s-manifests/mysql-service.yaml
+          kubectl apply -f k8s-manifests/backend-deployment.yaml
+          kubectl apply -f k8s-manifests/backend-service.yaml
+          kubectl apply -f k8s-manifests/frontend-deployment.yaml
+          kubectl apply -f k8s-manifests/frontend-service.yaml
+          kubectl apply -f k8s-manifests/ingress.yaml
+          kubectl set image deployment/itp-backend \
+            backend=$ECR_REGISTRY/$BACKEND_IMAGE:${{ github.sha }} \
+            -n itp-app
+          kubectl set image deployment/itp-frontend \
+            frontend=$ECR_REGISTRY/$FRONTEND_IMAGE:${{ github.sha }} \
+            -n itp-app
+          kubectl rollout status deployment/itp-backend -n itp-app
+          kubectl rollout status deployment/itp-frontend -n itp-app
+
+      - name: Verify deployment
+        run: |
+          kubectl get pods -n itp-app
+          kubectl get ingress -n itp-app
